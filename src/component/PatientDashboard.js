@@ -1,13 +1,13 @@
 import React from "react";
 import Navbar from "./Navbar";
 import "./Dasboard.css";
-import Sidebar from "./Sidebar"
+// import Sidebar from "./Sidebar"
 
 const PatientDashboard = () => {
   return (
     <div>
       <Navbar />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <section className="content">
         <div className="box">
           <h1>Hi Patient!</h1>
