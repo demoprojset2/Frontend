@@ -8,9 +8,10 @@ import Navbar from './component/Navbar';
 import SignUpForm from "./component/SignUpForm";
 import SignInForm from "./component/SignInForm";
 import PatientLogin from "./component/Patientlogin";
-import Doctor from "./component/Doc";
+import Doctor from "./component/Doctor";
 
 import Body from "./component/Body";
+import Doctordashboard from "./component/Doctor-Dashboard";
 // import Home from "./component/Home"
 
 // function App() {
@@ -49,8 +50,10 @@ class App extends Component {
               <Route path="/sign-in" element={<SignInForm />} />
               <Route path="/patient-login" element={<PatientLogin />} />
               <Route path="/doctor" element={<Doctor />} />
-
+        
               <Route exact path="/body" element={<Body />} ></Route>
+            <Route  path="/docdash" element={<Doctordashboard />} ></Route>
+
               {/* </div> */}
               
             </Routes>
