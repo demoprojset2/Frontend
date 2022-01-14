@@ -132,7 +132,7 @@ export default class Medication extends Component {
                         </div>
                     ))}
 
-                    <div className="col-2 my-4">
+                    <div className="col-2 my-3">
                         <button className="btn btn-primary" onClick={() => this.addFormFields()}>
                             Add Section
                         </button>
