@@ -8,9 +8,9 @@ import Navbar from './component/Navbar';
 import SignUpForm from "./component/SignUpForm";
 import SignInForm from "./component/SignInForm";
 import PatientLogin from "./component/Patientlogin";
-import Doctor from "./component/Doc";
+// import Doctor from "./component/Doc";
 
-import Body from "./component/Body";
+// import Body from "./component/Body";
 // import Home from "./component/Home"
 
 // function App() {
@@ -48,9 +48,9 @@ class App extends Component {
               <Route path="/sign-up" element={<SignUpForm />} ></Route>
               <Route path="/sign-in" element={<SignInForm />} />
               <Route path="/patient-login" element={<PatientLogin />} />
-              <Route path="/doctor" element={<Doctor />} />
+              {/* <Route path="/doctor" element={<Doctor />} />
 
-              <Route exact path="/body" element={<Body />} ></Route>
+              <Route exact path="/body" element={<Body />} ></Route> */}
               {/* </div> */}
               
             </Routes>
