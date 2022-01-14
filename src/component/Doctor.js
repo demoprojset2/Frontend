@@ -154,9 +154,9 @@ export default class Body extends Component {
           className="form-control"
           id="validationCustom05"
           minLength="10"
-          maxLength="10"
+          maxLength="13"
           name="phoneno"
-          value={this.state.phoneno}
+          value={"+91"+this.state.phoneno}
           onChange={this.handleChange}
           required
         />
