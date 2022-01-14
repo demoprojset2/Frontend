@@ -36,12 +36,12 @@ export default class Medication extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        alert(JSON.stringify(this.state.formValues));
+        console.log(JSON.stringify(this.state.formValues));
     }
     render() {
         return (
-            <div className="mx-3 grid" style={{ backgroundColor: '#ddab7d' }}>
-                <form className="row g-3 needs-validation mx-4 my-4" onSubmit={this.handleSubmit} >
+            // <div className="mx-3 grid" style={{ backgroundColor: '#ddab7d' }}>
+                <form className="row g-3 needs-validation mx-4 my-4" >
                     <h1 className="text-center my-5">Medication Details</h1>
                     {this.state.formValues.map((element, index) => (
                         <div key={index}>
@@ -132,20 +132,19 @@ export default class Medication extends Component {
                         </div>
                     ))}
 
-                    <div className="col-2 my-3">
+                    <div className="col-2 my-4">
                         <button className="btn btn-primary" onClick={() => this.addFormFields()}>
                             Add Section
                         </button>
                     </div>
                     <div className="col-2 my-4">
-                        <button className="btn btn-primary" type="submit">
+                        <button className="btn btn-primary" onClick={this.handleSubmit}>
                             Submit
                         </button>
                     </div>
 
                 </form >
-            </div >
+            // </div >
         )
     }
 }
-
