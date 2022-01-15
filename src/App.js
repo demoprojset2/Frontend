@@ -10,6 +10,8 @@ import SignInForm from "./component/SignInForm";
 import PatientLogin from "./component/Patientlogin";
 import PatientDashboard from './component/PatientDashboard'
 import Doctor from './component/Doctor'
+import ProblemDetails from "./component/patient/ProblemDetails";
+import Prescriptions from "./component/patient/Prescriptions";
 // import Doctor from "./component/Doc";
 
 // import Body from "./component/Body";
@@ -53,6 +55,8 @@ class App extends Component {
               <Route path="/patient-dashboard" element={<PatientDashboard />} />
 
               <Route path="/doctor" element={<Doctor />} />
+              <Route path="/problem-details" element={<ProblemDetails />} />
+              <Route path="/prescriptions" element={<Prescriptions />} />
 
               {/* <Route exact path="/body" element={<Body />} ></Route> */ }
               {/* </div> */}
