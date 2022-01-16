@@ -1,50 +1,45 @@
-import React, { Component } from "react";
-import { NavLink, Link, Redirect,Router,withRouter } from "react-router-dom";
+import React, { Component,useState } from "react";
+import { NavLink, Link, Redirect,Router,withRouter,Navigate } from "react-router-dom";
 import "../App.css"
+import axios from 'axios'
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
   FacebookLoginButton,
   InstagramLoginButton
 } from "react-social-login-buttons";
 
-class PatientLogin extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      patient_id: "",
-
+const PatientLogin = () => {
    
-    };
+  const [id, setId] = useState("")
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  const [success, setSuccess] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const resp1 = await axios.get(`api/patient/${id}/me`);
+      if(resp1.data.name){
+        console.log(resp1.data.id)
+        setSuccess(true)
+        // return <Navigate to="/doctor" />
+      }else{
+        console.log(id)
+        toast("Patient Not Found")
+      }
+    } catch (error) {
+      console.log(error)
+      toast("Invalid Id")
+    }
+  } 
+  if(success){
+    return <Navigate to={`/patient-dashboard/${id}`} />
   }
 
-  handleChange(event) {
-    let target = event.target;
-
-    let name = target.name;
-
-    // this.setState({
-    //   [name]: value
-    // });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-
-    console.log("The form was submitted with the following data:");
-    console.log(this.state);
- 
- 
-    
-  }
-
-  render() {
-   
     return (
       <div className="App">
+        <ToastContainer />
         <div className="appAside" />
           <div className="appForm">
           <div className="formCenter pageSwitcher">
@@ -58,7 +53,7 @@ class PatientLogin extends Component {
           </div>
       
       <div className="formCenter">
-        <form className="formFields" onSubmit={this.handleSubmit}>
+        <form className="formFields" onSubmit={handleSubmit}>
           <div className="formField">
             <label className="formFieldLabel" >
               Patient Id
@@ -69,8 +64,8 @@ class PatientLogin extends Component {
               className="formFieldInput"
               placeholder="Enter Patient Id"
               name="patient_id"
-              value={this.state.email}
-              onChange={this.handleChange}
+              value={id}
+              onChange={(e) => setId(e.target.value)}
             />
           </div>
 
@@ -90,6 +85,5 @@ class PatientLogin extends Component {
       </div>
     );
   }
-}
 
 export default PatientLogin;

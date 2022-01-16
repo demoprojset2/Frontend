@@ -52,7 +52,7 @@ class App extends Component {
               <Route path="/sign-up" element={<SignUpForm />} ></Route>
               <Route path="/sign-in" element={<SignInForm />} />
               <Route path="/patient-login" element={<PatientLogin />} />
-              <Route path="/patient-dashboard" element={<PatientDashboard />} />
+              <Route path="/patient-dashboard/:id" element={<PatientDashboard />} />
 
               <Route path="/doctor" element={<Doctor />} />
               <Route path="/problem-details" element={<ProblemDetails />} />
