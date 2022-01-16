@@ -2,24 +2,42 @@ import React from "react";
 import Card from "../Card";
 import PatientsNavbar from "./PatientsNavbar";
 import "../Dasboard.css";
+import axios from "axios";
 
-const Prescriptions = () => {
+const Prescriptions = ({ all }) => {
+  // console.log(all)
+
   return (
     <div className="background1">
-        <div class="card text-center mw-100 mr-5 ml-5 mt-5">
-                <Card title="Prescriptions" />
-            </div>
-        {/* <section className="cardBox background1 mt-5">
-      <div className="card-container-container">
-        <div
-          className="card card1 text-center explanation mw-100"
-          id="zen-explanation"
-          role="article"
-        >
-          <Card title="Prescriptions" className="mw-100" />
-        </div>
+      <section className="mt-5">
+        <div className="bg-light mr-5 ml-5">
+          
+            
+          
+
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Medicine</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Timing</th>
+          </tr>
+        </thead>
+        <tbody>
+        {all.map((el) => (
+          <tr>
+            <td>{el.Medicine}</td>
+            <td>{el.Description}</td>
+            <td>{el.Amount}</td>
+            <td>{el.Timing}</td>
+          </tr>
+      ))}
+          
+        </tbody>
+      </table>
       </div>
-      </section> */}
+    </section>
     </div>
   );
 };

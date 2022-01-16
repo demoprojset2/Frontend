@@ -1,20 +1,18 @@
 import React from "react";
 import "./Dasboard.css";
 
-const Card = ({title}) => {
+const Card = ({ title, data }) => {
   return (
-    <div >
+    <div>
       <div className="card-header">
         <h3>{title}</h3>
       </div>
-      <div class="card-body preamble" id="zen-preamble" role="article"> 
-        <p class="card-text">id :</p>
-        <p class="card-text">name : </p>
-        <p class="card-text">Start Date</p>
-        <p class="card-text">End Date </p>
-        <p class="card-text">problem</p>
-        {/* <p class="card-text">asdfghjknbv </p>
-                      <p class="card-text">asdfghjknbv </p> */}
+      <div class="card-body preamble" id="zen-preamble" role="article">
+        {Object.keys(data).map((key) => (
+          <p className="card-text">
+            {key} : {data[key]}
+          </p>
+        ))}
       </div>
     </div>
   );
