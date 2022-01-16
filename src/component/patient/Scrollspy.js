@@ -8,7 +8,7 @@ const Scrollspy = ({num,selected}) => {
     
   return (
     <div className="nav-bar">
-      <nav id="navbar-example2" className="navbar bg-dark d-flex justify-content-around">
+      <nav className="navbar bg-dark d-flex justify-content-around">
       {/* <button
         className="navbar-toggler"
         type="button"
@@ -19,13 +19,13 @@ const Scrollspy = ({num,selected}) => {
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse justify-content-end" id="navbarNav"> */}
+      </button> 
+       <div className="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03"> */}
         <ul className="nav nav-pills" style={{alignItems:" stretch", justifyContent: "space-between"}}>
           <li className="nav-item" >
             <button style={{borderBottom: selected ===1 ? "2px solid white" : "none"}} className="nav-link scroll" onClick={()=>num(1)}>
-              General Details
-            </button>
+              Patient Details
+              <span class="sr-only">(current)</span></button>
           </li>
           <li className="nav-item">
             <button style={{borderBottom: selected ===2 ? "2px solid white" : "none"}} className="nav-link scroll" onClick={()=>num(2)}>

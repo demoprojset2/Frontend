@@ -8,7 +8,7 @@ const PatientsNavbar = () => {
       <div className="nav-bar">
     <nav className="navbar navbar-expand-lg navbar-dark" >
       <Link className="navbar-brand" to="#">
-       Healthcare | Patients' Dashboard
+       Healthcare | Dashboard
       </Link>
       <button
         className="navbar-toggler"
