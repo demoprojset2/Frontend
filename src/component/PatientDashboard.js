@@ -10,8 +10,11 @@ import Scrollspy from "./patient/Scrollspy";
 import PatientsDetails from "./patient/PatientsDetails";
 import ProblemDetails from "./patient/ProblemDetails";
 import Prescriptions from "./patient/Prescriptions";
+import {useParams} from 'react-router'
 
 const PatientDashboard = () => {
+  const params = useParams()
+    // console.log(params)
   const [component, setComponent] = useState(1);
   const [all, setAll] = useState([])
   const [patient, setPatient] = useState({
@@ -34,10 +37,12 @@ const PatientDashboard = () => {
   const [allergy, setAllergy] = useState(null);
   const [problem, setProblem] = useState(null);
 
-  const id = "436c9dae-b34b-42d9-8139-002a7d1c9353";
 
   const fetchPatientData = async () => {
-    const resp1 = await axios.get(`api/patient/${id}/me`);
+
+  const id = params.id
+
+    const resp1 = await axios.get(`/api/patient/${id}/me`);
     setPatient({
       Id: resp1.data.id,
       Name: resp1.data.name,
@@ -46,7 +51,7 @@ const PatientDashboard = () => {
       Contact: resp1.data.phone_number,
       "Treatment under": resp1.data.doctor_name,
     });
-    const resp2 = await axios.get(`api/patient/${id}/vitals`);
+    const resp2 = await axios.get(`/api/patient/${id}/vitals`);
     setVitals({
       Date: resp2.data.date_added,
       Height: resp2.data.height,
@@ -55,39 +60,35 @@ const PatientDashboard = () => {
       Temperature: resp2.data.temperature,
       "Blood Pressure": resp2.data.blood_pressure,
     });
-    const resp3 = await axios.get(`api/patient/${id}/medications`);
+    const resp3 = await axios.get(`/api/patient/${id}/medications`);
     setMedications(resp3.data);
-    const resp4 = await axios.get(`api/patient/${id}/allergy`);
+    const resp4 = await axios.get(`/api/patient/${id}/allergy`);
     setAllergy(resp4.data);
-    const resp5 = await axios.get(`api/patient/${id}/problem`);
+    const resp5 = await axios.get(`/api/patient/${id}/problem`);
     setProblem(resp5.data);
-    // const resp1 = await axios.get(`https://localhost:8000/api/patient/${id}/me`)
-
-
 
     const fun = async (id) => {
-        const { data } = await axios.get(`api/patient/${id}/dose/`)
+        const { data } = await axios.get(`/api/patient/${id}/dose/`)
         return data
     }
-
+    let nw = []
     resp3.data.map(async (el) => {
         let dta = await fun(el.id)
         let obj = {
-            "Medicine":el.medication_name,
+            "Medicine":el.medication_name, 
             "Description":dta.dose_description,
             "Timing":dta.dose_timing,
             "Amount":dta.dose_amount
         }
-        let nw = [...all,obj]
-        setAll(nw)
+        nw.push(obj)
+        // setAll(nw)
     })
+    setAll(nw)
   };
 
   useEffect(() => {
     fetchPatientData();
   }, []);
-
-  const navigate = useNavigate();
 
   return (
     <div>

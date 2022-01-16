@@ -5,7 +5,7 @@ import "../Dasboard.css";
 import axios from "axios";
 
 const Prescriptions = ({ all }) => {
-  // console.log(all)
+  console.log(all)
 
   return (
     <div className="background1">
@@ -26,7 +26,7 @@ const Prescriptions = ({ all }) => {
         </thead>
         <tbody>
         {all.map((el) => (
-          <tr>
+          <tr key={el.id}> 
             <td>{el.Medicine}</td>
             <td>{el.Description}</td>
             <td>{el.Amount}</td>
