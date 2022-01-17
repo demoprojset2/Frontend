@@ -10,6 +10,7 @@ class ViewPatient extends Component {
    
     this.state = {
         posts:[],
+        originalPosts:[],
         search:"",
         DataisLoaded: false,
         id:[],
@@ -28,6 +29,8 @@ class ViewPatient extends Component {
     if(token == null){
       window.location.href = "/"
     }
+    
+
      
 }
   async componentDidMount() {
@@ -44,13 +47,18 @@ class ViewPatient extends Component {
     })
     const posts = res1.data;
       console.log(posts);
-      posts.forEach(element => {
+      // posts.forEach(element => {
         this.setState({
-            posts:[...this.state.posts,element.name],
+            posts:posts,
+            originalPosts:posts
                
             }) 
-          }) 
- 
+     
+
+          // }) 
+         
+        
+  
   } 
 
   handle(e) {
@@ -58,9 +66,9 @@ class ViewPatient extends Component {
        search:e.target.value
    })
     
-     const filteredPatients = this.state.posts.filter((post) => post.toLowerCase().includes(e.target.value.toLowerCase()));
+    //  const filteredPatients = this.state.posts.filter((post) => post.name.toLowerCase().includes(e.target.value.toLowerCase()));
     this.setState({
-        posts:this.state.posts.filter((post) => post.toLowerCase().includes(e.target.value.toLowerCase()))
+        posts:this.state.originalPosts.filter((post) => post.name.toLowerCase().includes(e.target.value.toLowerCase()))
     })
   }
  async handleSearch(post){
@@ -82,21 +90,21 @@ class ViewPatient extends Component {
     this.setState({
       redirect:true
     })
-   
+    
+      // posts.forEach(element => {
+      //   this.setState({
+      //       posts:[...this.state.posts,element.name],
+               
+      //       }) 
+     
+
+          // }) 
 
         }
        async handleClick(post){
-          let doctor_id=localStorage.getItem('doc_id')
-          let token=localStorage.getItem('token')
-          const header = {
-              "Authorization":"Bearer " + token
-            }
-           const res3 = await axios.get(`http://127.0.0.1:8000/api/doctors/${doctor_id}/search/${post}`,{
-              headers:header
-          })
-            console.log(res3.data[0].id)
+         
            
-            localStorage.setItem("pat_id",res3.data[0].id)
+            localStorage.setItem("pat_id",post)
                  
        
             window.location.href = "/viewdetails"
@@ -104,11 +112,41 @@ class ViewPatient extends Component {
         }
 
 
+
+
+
+  
+
+
+  // handleSubmit(event) {
+  //   event.preventDefault();
+
+  //   // console.log("The form was submitted with the following data:");
+  //   // console.log(this.state);
+  //   const post = {
+  //     username:this.state.name,
+  //     password:this.state.password
+  //    }
+  //       axios.post("http://127.0.0.1:8000/auth/api/login/",post).then(res => {
+  //        console.log(res.data.token.access)
+  //        this.state.message = true
+  //        toast("You are successfully login.")
+  //       //  localStorage.setItem('token',res.data.token.access)
+  //       //  localStorage.setItem('currentuser',this.state.name)
+    
+  //      }).catch(err => {
+  //        console.log(err);
+  //      })
+      
+  // }
     render() {
       if(this.state.redirect){
         return <Navigate to="/modals" />
       }
-
+    
+  
+  
+      
         return (
           <div>
             <Navbar />
@@ -128,7 +166,7 @@ class ViewPatient extends Component {
         <div class="project-title d-flex align-items-center">
           
           <div class="image has-shadow"><img src={"https://www.w3schools.com/howto/img_avatar.png"} alt="..." class="img-fluid"></img></div>
-          <div key={index} class="text"><h3 class="h4">{post}</h3><small>name</small>
+          <div key={index} class="text"><h3 class="h4">{post.name}</h3><small>name</small>
           </div>
         </div>
         <div class="project-date">
@@ -139,12 +177,12 @@ class ViewPatient extends Component {
       </div>
       <div class="right-col col-lg-3 d-flex align-items-center">
         <div class="time"><i class="fa fa-clock-o"></i> 
-        <button onClick={() => this.handleSearch(post)} className="formFieldLink btn btn-danger">
+        <button onClick={() => this.handleSearch(post.name)} className="formFieldLink btn btn-danger">
               Add Details
             </button>
         </div>
         <div class="time"><i class="fa fa-clock-o"></i> 
-        <button onClick={() => this.handleClick(post)} className="formFieldLink btn btn-info">
+        <button onClick={() => this.handleClick(post.id)} className="formFieldLink btn btn-info">
               View Details
             </button>
         </div>
@@ -155,7 +193,8 @@ class ViewPatient extends Component {
     </div>
   </div>
  )}  
-
+  
+  {/* </div> */}
 </div>
 </section>
 </div>
@@ -166,5 +205,3 @@ class ViewPatient extends Component {
 	}
 
 export default ViewPatient;
-
-// Final Code
