@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Navbar from './Navbar';
+import background from '../background.jpeg'
+import './modals.css'
 
 export default class Medication extends Component {
   constructor() {
@@ -26,7 +28,8 @@ export default class Medication extends Component {
       manufacturer:"",
      dose_desc:"",
      med_id:null,
-     amount:null
+     amount:null,
+     pat_name:""
      
    
       
@@ -74,6 +77,26 @@ export default class Medication extends Component {
     
     // window.location.reload();
   }
+  async componentDidMount() {
+  
+    let pat_id=localStorage.getItem('pat_id')
+    let token = localStorage.getItem("token");
+    
+    const header = {
+     "Authorization":"Bearer " + token
+   }
+   
+    const res1 =  await axios.get((`http://127.0.0.1:8000/api/patients/${pat_id}/details`),{
+     headers:header
+ })
+  const postt = res1.data
+    this.setState({
+        
+    pat_name:postt.name
+      
+   })
+ 
+ } 
   handleallergySubmit(event) {
       event.preventDefault();
      
@@ -187,12 +210,15 @@ window.location.reload()
           <div>
 
         <Navbar />
-        
-         <div className="d-flex justify-content-evenly align-items-center" style={{height:"100vh",backgroundImage:"url(" + "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80" + ")",backgroundRepeat:"no-repeat", backgroundSize:"cover"}}>
+        <div style={{height:"100vh", backgroundImage:`url(${background})`,backgroundRepeat:"no-repeat", backgroundSize:"cover"}}>
+          <div className="d-flex justify-content-evenly align-items-center" style={{height:"30vh"}}>
+          <h1 className='bg-dark rounded p-1 text-white'>Patient Name: {this.state.pat_name}</h1>
+          </div>
+         <div className="d-flex justify-content-evenly align-items-center nn" style={{height:"50vh"}}>
         
            <div className='modal1'>
             <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
-              Allergy Details
+              Add Allergy Details
             </button>
             
          
@@ -305,7 +331,7 @@ window.location.reload()
            </div>
            <div className='modal2'>
             <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModalCenter2">
-              Problem Details
+              Add Problem Details
             </button>
             
   
@@ -415,7 +441,7 @@ window.location.reload()
             <div className='modal3'>
             <div>
             <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModalCenter3">
-              Medication Details
+              Add Medication Details
             </button>
             
   
@@ -558,6 +584,7 @@ window.location.reload()
             </div>
             </div>
             </div>
+         </div>
          </div>
          </div>
         )
