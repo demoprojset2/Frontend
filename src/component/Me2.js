@@ -45,15 +45,15 @@ async componentDidMount() {
             <div>
                 <Navbar />
                 <div className='d-flex flex-column  align-items-center justify-content-center' style={{height:"100vh", backgroundImage:"url(" + "https://images.unsplash.com/photo-1628771065518-0d82f1938462?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" + ")",backgroundRepeat:"no-repeat", backgroundSize:"cover"}}>
-            <div class="card text-center" >
-  <div class="card-header">
+            <div className="card text-center" >
+  <div className="card-header">
     My Details
   </div>
-  <div class="card-body">
-  <h2>Name: {this.state.username}</h2>
-  <h2>Speciality: {this.state.speciality}</h2>
-  <h2>Email: {this.state.email}</h2>
-  <h2>Gender: {this.state.gender}</h2>
+  <div className="card-body">
+  <h5 className="mb-4">Name: {this.state.username}</h5>
+  <h5 className="mb-4">Speciality: {this.state.speciality}</h5>
+  <h5 className="mb-4">Email: {this.state.email}</h5>
+  <h5 className="mb-4">Gender: {this.state.gender}</h5>
   </div>
 </div>
 </div>
