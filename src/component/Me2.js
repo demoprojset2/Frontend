@@ -14,7 +14,13 @@ export default class me2 extends Component {
         email:"",
         gender:""
     };
+    const token = localStorage.getItem("token");
+   if(token == null){
+     window.alert("Please log in !")
+     window.location.href = "/"
+   }
 }
+
 async componentDidMount() {
   
    let doctor_id=localStorage.getItem('doc_id')
