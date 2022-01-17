@@ -1,5 +1,6 @@
+import axios from "axios";
 import React, { Component } from "react";
-import { NavLink,Link } from "react-router-dom";
+import { NavLink,Link ,Navigate} from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "../App.css"
@@ -13,7 +14,12 @@ class SignUpForm extends Component {
       password: "",
       confirmPassword:"",
       name: "",
-      hasAgreed: false
+      speciality:"",
+      gender:"",
+      // hasAgreed: false,
+      first_name:"",
+      last_name:"",
+      redirect:false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,13 +39,62 @@ class SignUpForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if(this.state.password !== this.state.confirmPassword){
-      toast("Password fields Not Matching")
+      toast.error("Password fields Not Matching")
+      return
     }
     console.log("The form was submitted with the following data:");
     console.log(this.state);
+ const post = {
+  username:this.state.name,
+  email:this.state.email,
+ password:this.state.password,
+  password2:this.state.confirmPassword,
+  speciality:this.state.speciality,
+  gender:this.state.gender,
+  first_name:this.state.first_name,
+  last_name:this.state.last_name
+
+ }
+   axios.post("http://127.0.0.1:8000/auth/api/register/",post).then(res => {
+     console.log(res)
+     toast.success("You are successfully registered.Please sign!")
+   }).catch(err => {
+     console.log(err.response);
+     const err_user = err.response.data
+     if(err_user.username){
+     toast.error(err_user.username[0])
+
+     }
+     else if(err_user.non_field_errors){
+     toast.error(err_user.non_field_errors[0])
+
+
+     }
+    //  toast.error("Please enter correct details !")
+
+   })
+
+   this.setState({
+    username:"",
+    email:"",
+   password:"",
+    confirmPassword:"",
+    speciality:"",
+    gender:"",
+    first_name:"",
+    last_name:"",
+    // redirect:true
+
+   })
+
+
   }
 
   render() {
+
+    if(this.state.redirect){
+      return <Navigate to="/sign-in" />
+    }
     return (
       
       <div className="App">
@@ -51,18 +106,18 @@ class SignUpForm extends Component {
               <Link
                 to="/"
                 activeClassName="pageSwitcherItem-active"
-                className="pageSwitcherItem"
+                className="pageSwitcherItem btn-success"
               >
                 Home
               </Link>
-              {/* <NavLink
+              <NavLink
                 exact
-                to="/sign-up"
+                to="/sign-in"
                 activeClassName="pageSwitcherItem-active"
-                className="pageSwitcherItem"
+                className="pageSwitcherItem  btn-info"
               >
-                Sign Up
-              </NavLink> */}
+                Sign in
+              </NavLink>
             </div>
 
             <div className="formTitle">
@@ -87,7 +142,7 @@ class SignUpForm extends Component {
         <form onSubmit={this.handleSubmit} className="formFields">
           <div className="formField">
             <label className="formFieldLabel" htmlFor="name">
-              Full Name
+              User Name
             </label>
             <input
               type="text"
@@ -100,6 +155,52 @@ class SignUpForm extends Component {
               required
             />
           </div>
+          <div className="formField">
+            <label className="formFieldLabel" htmlFor="name">
+              First Name
+            </label>
+            <input
+              type="text"
+              id="firstname"
+              className="formFieldInput"
+              placeholder="Enter your first name"
+              name="first_name"
+              value={this.state.first_name}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
+          <div className="formField">
+            <label className="formFieldLabel" htmlFor="name">
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="lastname"
+              className="formFieldInput"
+              placeholder="Enter your last name"
+              name="last_name"
+              value={this.state.last_name}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
+          <div className="formField">
+            <label className="formFieldLabel" htmlFor="password">
+              Speciality
+            </label>
+            <input
+              type="text"
+              id="speciality"
+              className="formFieldInput"
+              placeholder="Enter your Speciality"
+              name="speciality"
+              value={this.state.speciality}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
+          
           <div className="formField">
             <label className="formFieldLabel" htmlFor="password">
               Password
@@ -145,7 +246,30 @@ class SignUpForm extends Component {
               required
             />
           </div>
+          <div className="col-md-3">
+        <label htmlFor="validationCustom04" className="form-label">
+          Gender
+        </label>
+        <div className="formField">
 
+        <select className="form-select"
+         id="validationCustom04"
+         name="gender"
+         value={this.state.gender}
+         onChange={this.handleChange}
+          required>
+          <option selected disabled value="">
+            Select
+          </option>
+          <option value="Male">Male</option>
+
+          <option value="Female">Female</option>
+          {/* <option value="T">Others</option> */}
+        </select>
+        </div>
+        <div className="invalid-feedback">Please select a valid Gender.</div>
+      </div>
+{/* 
           <div className="formField">
             <label className="formFieldCheckboxLabel">
               <input
@@ -160,7 +284,8 @@ class SignUpForm extends Component {
                 terms of service
               </a>
             </label>
-          </div>
+          </div> */}
+         
 
           <div className="formField">
             <button className="formFieldButton">Sign Up</button>{" "}
