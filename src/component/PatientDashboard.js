@@ -35,9 +35,35 @@ const PatientDashboard = () => {
     Temperature: "",
     "Blood Pressure": "",
   });
+
+  const tobacco=(t)=>{
+    if(t==='1'){
+      return "Never Smoked"
+    }else if(t==='2'){
+      return "Current Smoker"
+    }else{
+      return "Former Smoker"
+    }
+  };
+
+  const alcohol=(t)=>{
+    if(t==='1'){
+      return "Current Drinker"
+    }else if(t==='2'){
+      return "Former Drinker"
+    }else{
+      return "Non Drinker"
+    }
+  };
+
+
   const [medications, setMedications] = useState(null);
   const [allergy, setAllergy] = useState(null);
   const [problem, setProblem] = useState(null);
+  const [social, setSocial] = useState({
+    Tobacco:"",
+    Alcohol:"",
+  } );
 
 
   const fetchPatientData = async () => {
@@ -110,6 +136,17 @@ const PatientDashboard = () => {
     } catch (error) {
       toast("Some Error Occured!")
     };
+
+    try {
+      const resp6= await axios.get(`/api/patient/${id}/social`);
+      setSocial({
+        Tobacco:tobacco(resp6.data.tobacco),
+        Alcohol:alcohol(resp6.data.alcohol),
+      }
+      )
+    } catch (error) {
+      toast("Some Error Occured!")
+    };
     
 
     const fun = async (id) => {
@@ -151,7 +188,7 @@ const PatientDashboard = () => {
             <div className="mr-5 ml-5 rounded inner-box pb-5 mb-5">
               <Scrollspy num={setComponent} selected={component} />
               {component === 1 && (
-                <PatientsDetails patient={patient} vitals={vitals} />
+                <PatientsDetails patient={patient} vitals={vitals} social={social} />
               )}
               {component === 2 && (
               <ProblemDetails problem={problem} allergy={allergy} />
