@@ -36,10 +36,10 @@ class PatientDetails extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     const token = localStorage.getItem("token");
-  //  if(token == null){
-  //    window.alert("Please log in !")
-  //    window.location.href = "/"
-  //  }
+   if(token == null){
+     window.alert("Please log in !")
+     window.location.href = "/"
+   }
   
 
   }
