@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link ,Navigate} from 'react-router-dom';
 import axios from 'axios';
+import background from '../background.jpeg'
 
 import PatientLogin from './Patientlogin';
 import Navbar from './Navbar';
@@ -132,13 +133,13 @@ class PatientDetails extends Component {
         return (
           <div>
             <Navbar />
-         <div className="d-flex justify-content-evenly align-items-center" style={{height:"100vh",backgroundImage:"url(" + "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80" + ")",backgroundRepeat:"no-repeat", backgroundSize:"cover", }}>
+         <div className="d-flex justify-content-evenly align-items-center" style={{backgroundImage:`url(${background})`,backgroundRepeat:"no-repeat", backgroundSize:"cover", color:"#040914" }}>
 
-<form className="row g-3 needs-validation mx-4 my-4" onSubmit={this.handleSubmit}   >
-  <h1 className="text-center my-3">Patient Details</h1>
-  <div className="row g-3">
-    <div className="col-md-3 pb-3">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom01" className="form-label">
+<form className="row g-3 needs-validation mx-4 my-4" onSubmit={this.handleSubmit}  >
+  <h1 className="text-center my-3 " style={{fontWeight:"bolder", color:"#040914"}} >Patient Details</h1>
+  <div className="row g-3"  >
+    <div className="col-md-3 pb-3"  >
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom01" className="form-label">
           Name
         </label>
         <input
@@ -153,7 +154,7 @@ class PatientDetails extends Component {
         <div className="valid-feedback">Looks good!</div>
       </div>
       <div className="col-md-3 pb-3">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom05" className="form-label">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom05" className="form-label">
           Phone Number
         </label>
         <input
@@ -170,7 +171,7 @@ class PatientDetails extends Component {
         <div className="invalid-feedback">Please provide a Phone Number.</div>
       </div>
       <div className="col-md-3 pb-3">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom04" className="form-label">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom04" className="form-label">
           Gender
         </label>
         <select className="form-select"
@@ -190,7 +191,7 @@ class PatientDetails extends Component {
         <div className="invalid-feedback">Please select a valid Gender.</div>
       </div>
       <div className="col-md-3 pb-3">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustomUsername" className="form-label">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustomUsername" className="form-label">
           Email
         </label>
         <div className="input-group has-validation">
@@ -207,8 +208,8 @@ class PatientDetails extends Component {
           <div className="invalid-feedback">Please choose an Email.</div>
         </div>
         </div>
-      <div className="col-md-4 pb-3">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom03" className="form-label">
+      <div className="col-md-6 pb-3">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom03" className="form-label">
           Address
         </label>
         <input
@@ -222,8 +223,8 @@ class PatientDetails extends Component {
         />
         <div className="invalid-feedback">Please provide a valid Address.</div>
       </div>
-      <div className="col-md-2 pb-3">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom01" className="form-label">
+      <div className="col-md-3 pb-3">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom01" className="form-label">
           Date of Birth
         </label>
         <input
@@ -237,8 +238,8 @@ class PatientDetails extends Component {
         />
         <div className="valid-feedback">Looks good!</div>
       </div>
-      <div className="col-md-2">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom01" className="form-label">
+      <div className="col-md-3">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom01" className="form-label">
           Weight (kg)
         </label>
         <input
@@ -253,8 +254,8 @@ class PatientDetails extends Component {
         />
         <div className="valid-feedback">Looks good!</div>
       </div>
-      <div className="col-md-2">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom01" className="form-label">
+      <div className="col-md-3">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom01" className="form-label">
           Height (Cm)
         </label>
         <input
@@ -269,8 +270,8 @@ class PatientDetails extends Component {
         />
         <div className="valid-feedback">Looks good!</div>
       </div>
-      <div className="col-md-2">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom01" className="form-label">
+      <div className="col-md-3">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom01" className="form-label">
           Date Added
         </label>
         <input
@@ -285,8 +286,8 @@ class PatientDetails extends Component {
         />
         <div className="valid-feedback">Looks good!</div>
       </div>
-      <div className="col-md-2">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom01" className="form-label">
+      <div className="col-md-3">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom01" className="form-label">
           BP(systolic)
         </label>
         <input
@@ -303,8 +304,8 @@ class PatientDetails extends Component {
         />
         <div className="valid-feedback">Looks good!</div>
       </div>
-      <div className="col-md-2">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom01" className="form-label">
+      <div className="col-md-3">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom01" className="form-label">
           BP(diastolic)
         </label>
         <input
@@ -320,8 +321,8 @@ class PatientDetails extends Component {
         />
         <div className="valid-feedback">Looks good!</div>
       </div>
-      <div className="col-md-2">
-        <label  style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom01" className="form-label">
+      <div className="col-md-3">
+        <label  style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom01" className="form-label">
           Temperature (F)
         </label>
         <input
@@ -331,12 +332,13 @@ class PatientDetails extends Component {
           onChange={this.handleChange}
           className="form-control"
           id="validationCustom01"
+          min={92}
           required
         />
         <div className="valid-feedback">Looks good!</div>
       </div>
-      <div className="col-md-2">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom01" className="form-label">
+      <div className="col-md-3">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom01" className="form-label">
           Pulse
         </label>
         <input
@@ -347,12 +349,13 @@ class PatientDetails extends Component {
           className="form-control"
           id="validationCustom01"
           placeholder='bpm'
+          min={50}
           required
         />
         <div className="valid-feedback">Looks good!</div>
       </div>
-      <div className="col-md-2">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom04" className="form-label">
+      <div className="col-md-3">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom04" className="form-label">
         Smoking Status
         </label>
         <select className="form-select" id="validationCustom04" name='smoking_status'
@@ -367,8 +370,8 @@ class PatientDetails extends Component {
         </select>
         <div className="invalid-feedback">Please select a valid status.</div>
       </div>
-      <div className="col-md-2">
-        <label style={{fontSize:"23px",fontWeight:"bolder", color:"#000000"}} htmlFor="validationCustom04" className="form-label">
+      <div className="col-md-3">
+        <label style={{fontSize:"20px",fontWeight:"bolder", color:"#040914"}} htmlFor="validationCustom04" className="form-label">
         Drinking Status
         </label>
         <select className="form-select" id="validationCustom04" name='drinking_status'
@@ -385,8 +388,8 @@ class PatientDetails extends Component {
       </div>
   
       </div>
-  <div className="col-2 my-4">
-        <button className="btn btn-success"  type='submit'>
+  <div className="col-3 my-4">
+        <button className="btn btn-success" style={{fontWeight:"bolder"}} type='submit'>
           Add Patient
         </button>
         </div>
