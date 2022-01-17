@@ -1,15 +1,21 @@
 import React, { Component } from "react";
-import {NavLink, Link } from "react-router-dom";
+import {NavLink,Navigate, Link } from "react-router-dom";
 import "../App.css"
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 class SignInForm extends Component {
   constructor() {
     super();
 
     this.state = {
-      email: "",
-      password: ""
+      name: "",
+      password: "",
+      login:false
+   
     };
+
+   
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,11 +36,42 @@ class SignInForm extends Component {
 
     console.log("The form was submitted with the following data:");
     console.log(this.state);
+    const post = {
+      username:this.state.name,
+      password:this.state.password
+     }
+       axios.post("http://127.0.0.1:8000/auth/api/login/",post).then(res => {
+         console.log(res.data.token.access)
+         console.log(res.data.profile.id)
+         localStorage.setItem("token",res.data.token.access);
+         localStorage.setItem("doc_id",res.data.profile.id)
+         this.setState({
+           login:true
+         })
+
+         toast.success("You are successfully login.")
+       }).catch(err => {
+         toast.error("Please enter correct details !")
+         console.log(err.response.data);
+       })
+
+      
+  
+   
+
   }
+ 
 
   render() {
+
+    if(this.state.login){
+      return <Navigate to="/docdash" />
+    }
+   
     return (
+      
       <div className="App">
+        <ToastContainer />
         <div className="appAside" />
           <div className="appForm">
           
@@ -43,7 +80,7 @@ class SignInForm extends Component {
               <NavLink
                 to="/"
                 activeClassName="pageSwitcherItem-active"
-                className="pageSwitcherItem"
+                className="pageSwitcherItem btn-success "
               >
                 Home
               </NavLink>
@@ -79,15 +116,15 @@ class SignInForm extends Component {
         <form className="formFields" onSubmit={this.handleSubmit}>
           <div className="formField">
             <label className="formFieldLabel" htmlFor="email">
-              E-Mail Address
+              User name
             </label>
             <input
-              type="email"
-              id="email"
+              type="text"
+              id="name"
               className="formFieldInput"
-              placeholder="Enter your email"
-              name="email"
-              value={this.state.email}
+              placeholder="Enter your user name"
+              name="name"
+              value={this.state.name}
               onChange={this.handleChange}
             />
           </div>
@@ -108,9 +145,9 @@ class SignInForm extends Component {
           </div>
 
           <div className="formField">
-            <button className="formFieldButton">Sign In</button>{" "}
+            <button  onClick={() => this.handleSubmit} className="formFieldButton">Sign In</button>{" "}
             <Link to="/sign-up" className="formFieldLink">
-              Create an account
+             Not registered ? click here
             </Link>
           </div>
 
