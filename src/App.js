@@ -8,13 +8,17 @@ import Navbar from './component/Navbar';
 import SignUpForm from "./component/SignUpForm";
 import SignInForm from "./component/SignInForm";
 import PatientLogin from "./component/Patientlogin";
+import Doctor from "./component/AddPatient";
+import Modals from "./component/Modals";
+import PatientDashboard2 from "./component/PatientDashboard2";
+import Me2 from "./component/Me2";
+
+import Body from "./component/Body";
+import Doctordashboard from "./component/Doctor-Dashboard";
+import ViewPatient from "./component/ViewPatients";
 import PatientDashboard from './component/PatientDashboard'
-import Doctor from './component/Doctor'
 import ProblemDetails from "./component/patient/ProblemDetails";
 import Prescriptions from "./component/patient/Prescriptions";
-// import Doctor from "./component/Doc";
-
-// import Body from "./component/Body";
 // import Home from "./component/Home"
 
 // function App() {
@@ -47,18 +51,27 @@ class App extends Component {
             
             
             <Routes>
-              <Route exact path="/" element={<Home />} ></Route>
+              <Route path="/" element={<Home />} ></Route>
               {/* <div className="App"> */}
               <Route path="/sign-up" element={<SignUpForm />} ></Route>
               <Route path="/sign-in" element={<SignInForm />} />
-              <Route path="/patient-login" element={<PatientLogin />} />
+              <Route path="/addpatient" element={<Doctor />} />
+              <Route path="/modals" element={<Modals />} />
+
+        
+              <Route exact path="/body" element={<Body />} ></Route>
+            <Route  path="/docdash" element={<Doctordashboard />} ></Route>
+            <Route  path="/patientlist" element={<ViewPatient />} ></Route>
+
+            <Route path="/patient-login" element={<PatientLogin />} />
               <Route path="/patient-dashboard/:id" element={<PatientDashboard />} />
 
-              <Route path="/doctor" element={<Doctor />} />
               <Route path="/problem-details" element={<ProblemDetails />} />
               <Route path="/prescriptions" element={<Prescriptions />} />
+              <Route  path="/me" element={<Me2/>} ></Route>
+              <Route  path="/viewdetails" element={<PatientDashboard2/>} ></Route>
 
-              {/* <Route exact path="/body" element={<Body />} ></Route> */ }
+
               {/* </div> */}
               
             </Routes>
@@ -68,7 +81,7 @@ class App extends Component {
     );
   }
 }
-// hi
+
 export default App;
 
 
