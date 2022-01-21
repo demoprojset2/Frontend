@@ -410,14 +410,17 @@ class PatientDetails extends Component {
                 Add Patient
               </button>
             </div>
-            <div>
-              {this.state.show ?
+            {this.state.show ?
+              <div>
                 <Link to="/modals" className="col-4 my-4" >
                   <button className="btn btn-primary" type='submit' style={{ fontWeight: "bold" }} >
                     Next
                   </button>
-                </Link> : null}
-            </div>
+                  
+                </Link> 
+                
+                </div>
+               : null }
           </div>
         </form >
 
