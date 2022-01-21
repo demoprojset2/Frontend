@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Navbar from './Navbar';
-import background from '../background.jpeg'
+
 import './modals.css'
+
+import { Link } from 'react-router-dom';
 
 export default class Medication extends Component {
   constructor() {
@@ -19,7 +21,7 @@ export default class Medication extends Component {
       severity:"",
       pstatus:"",
       startdate:"",
-      enddate:"",
+      enddate:"2022-01-11",
       additionaldetails:"",
       medic_name:"",
       dose_unit:"",
@@ -119,7 +121,10 @@ export default class Medication extends Component {
            headers:header
          }).then(res => {
            console.log(res)
-         
+         toast.success("Allergy details successfully added")
+         setTimeout(()=>{
+        window.location.reload()
+         },1500)
          }).catch(err => {
            console.log(err);
          })
@@ -151,13 +156,16 @@ export default class Medication extends Component {
              headers:header
            }).then(res => {
              console.log(res)
-           
+           toast.success("Patient problem successfully added")      
+           setTimeout(()=>{
+            window.location.reload()
+           },1500)
            }).catch(err => {
-             console.log(err);
+             console.log(err.response.data);
+           toast.error("Something went wrong! Sorry")
            })
           //  
         
-        window.location.reload()
       }
      async handlemedicalSubmit(event) {
     event.preventDefault();
@@ -185,10 +193,8 @@ export default class Medication extends Component {
      const res1 = await  axios.post(`http://127.0.0.1:8000/api/patients/${pat_id}/meds`,post,{
       headers:header    
     
- }).catch(err => {
-   console.log(err);
-   
  })
+ console.log(res1.data)
  this.setState({
    med_id:res1.data.id
  })
@@ -210,31 +216,26 @@ window.location.reload()
           <div>
 
         <Navbar />
-        <div style={{height:"100vh", backgroundImage:`url(${background})`,backgroundRepeat:"no-repeat", backgroundSize:"cover"}}>
-          <div className="d-flex justify-content-evenly align-items-center" style={{height:"30vh"}}>
-          <h1 className='bg-dark rounded p-1 text-white'>Patient Name: {this.state.pat_name}</h1>
+        <div className="d-flex justify-content-evenly align-items-center" style={{height:"15vh"}}>
+          <Link to="/viewdetails" className='new btn-lg btn-dark rounded pr-5 pl-5 pt-2 pb-2 text-white font-weight-bold'>{this.state.pat_name.toUpperCase()}<i className="fas fa-arrow-right pl-2" ></i></Link>
           </div>
-         <div className="d-flex justify-content-evenly align-items-center nn" style={{height:"50vh"}}>
-        
-           <div className='modal1'>
-            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
-              Add Allergy Details
-            </button>
-            
-         
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Allergy Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <form className="row g-3 needs-validation mx-4 my-4" onSubmit={this.handleallergySubmit}   >
+<section id="tabs" className="project-tab">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <nav>
+                            <div className="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Allergy Details</a>
+                                <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Problem Details </a>
+                                <a className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Medication Details</a>
+                            </div>
+                        </nav>
+                        <div className="tab-content" id="nav-tabContent">
+                            <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <form className="row g-3 needs-validation mx-4 my-4" onSubmit={this.handleallergySubmit}   >
                   
-                  <div class="modal-body">
-  <div className="row g-3">
+                  <div className="">
+  <div className="row g-3 p-4 mm shadow-lg" style={{backgroundColor:"#ACE1AF"}}>
       <div className="col-md-6">
         <label htmlFor="validationCustom01" className="form-label">
           Substance
@@ -302,7 +303,7 @@ window.location.reload()
         </select>
         <div className="invalid-feedback">Please select a valid Type.</div>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-12">
         <label htmlFor="validationCustom01" className="form-label">
           Comment
         </label>
@@ -320,34 +321,19 @@ window.location.reload()
       </div>
      
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit"  class="btn btn-success">Save changes</button>
+                  <div className="modal-footer border-0">
+                   
+                    <button type="submit"  className="btn fw-bold" style={{
+                                      backgroundColor:"#bd97f0", color:"black"
+                                    }}>Save changes</button>
                   </div>
                   </form>
-                </div>
-              </div>
-            </div>
-           </div>
-           <div className='modal2'>
-            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModalCenter2">
-              Add Problem Details
-            </button>
-            
-  
-            <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle2">Problems Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <form className="row g-3 needs-validation mx-4 my-4" onSubmit={this.handleproblemSubmit}   >
+                            </div>
+                            <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <form className="row g-3 needs-validation mx-4 my-4" onSubmit={this.handleproblemSubmit}   >
                   
-                  <div class="modal-body">
-  <div className="row g-3">
+                  <div className="">
+  <div className="row g-3 p-4 mm shadow-lg" style={{backgroundColor:"#ACE1AF"}}>
   <div className="col-md-6">
         <label htmlFor="validationCustom01" className="form-label">
           Problem Name
@@ -411,7 +397,7 @@ window.location.reload()
         />
         <div className="valid-feedback">Looks good!</div>
       </div>
-      <div className="col-md-6">
+      {/* <div className="col-md-6">
         <label htmlFor="validationCustom01" className="form-label">
           End Date
         </label>
@@ -422,43 +408,26 @@ window.location.reload()
           name="enddate"
         value={this.state.enddate}
         onChange={this.handleChange}
-          required
         />
         <div className="valid-feedback">Looks good!</div>
-      </div>
+      </div> */}
       </div>
      
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Save changes</button>
+                  <div className="modal-footer border-0">
+                   
+                    <button type="submit" className="btn  fw-bold" style={{
+                                      backgroundColor:"#bd97f0", color:"black"
+                                    }}>Save changes</button>
                   </div>
                   </form>
-                </div>
-              </div>
-            </div>
-            </div>
-            <div className='modal3'>
-            <div>
-            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModalCenter3">
-              Add Medication Details
-            </button>
-            
-  
-            <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle3" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle3">Medication Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <form className="row g-3 needs-validation mx-4 my-4" onSubmit={this.handlemedicalSubmit}   >
+                            </div>
+                            <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            <form className="row g-3 needs-validation mx-4 my-4" onSubmit={this.handlemedicalSubmit}   >
                   
-                  <div class="modal-body">
+                  <div className="">
 
-                                    <div className="row g-3">
+                                    <div className="row g-3 p-4 mm shadow-lg" style={{backgroundColor:"#ACE1AF"}}>
                                         <div className="col-md-6">
                                             <label htmlFor="validationCustom01" className="form-label">
                                                 Medication Name
@@ -484,21 +453,6 @@ window.location.reload()
                                                 id="validationCustom01"
                                                 name='manufacturer'
                                                 value={this.state.manufacturer}
-                                                onChange={this.handleChange}
-                                                required
-                                            />
-                                            <div className="valid-feedback">Looks good!</div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <label htmlFor="validationCustom01" className="form-label">
-                                                Expire Date
-                                            </label>
-                                            <input
-                                                type="date"
-                                                className="form-control"
-                                                id="validationCustom01"
-                                                name="expiredate"
-                                                value={this.state.expiredate}
                                                 onChange={this.handleChange}
                                                 required
                                             />
@@ -539,7 +493,7 @@ window.location.reload()
                                             </select>
                                             <div className="invalid-feedback">Please select a valid Data.</div>
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-md-12">
                                             <label htmlFor="validationCustom01" className="form-label">
                                                 Dose Description
                                             </label>
@@ -554,38 +508,23 @@ window.location.reload()
                                             />
                                             <div className="valid-feedback">Looks good!</div>
                                         </div>
-                                        <div className="col-md-12">
-                                            <label htmlFor="validationCustom01" className="form-label">
-                                                Amount
-                                            </label>
-                                            <input
-                                                type="number"
-                                                name='amount'
-                                                min={1}
-                                                max={99999}
-                                                value={this.state.amount}
-                                                onChange={this.handleChange}
-                                                className="form-control"
-                                                id="validationCustom01"
-                                                required
-                                            />
-                                            <div className="valid-feedback">Looks good!</div>
-                                        </div>
                                     </div>
 
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-success">Save changes</button>
+                                <div className="modal-footer border-0">
+                                   
+                                    <button type="submit" className="btn fw-bold" style={{
+                                      backgroundColor:"#bd97f0", color:"black"
+                                    }}>Save changes</button>
                                 </div>
                                 </form>
                             </div>
                         </div>
+                    </div>
+                </div>
             </div>
-            </div>
-            </div>
-         </div>
-         </div>
+        </section>
+      
          </div>
         )
     }
