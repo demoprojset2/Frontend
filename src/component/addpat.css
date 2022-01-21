@@ -1,0 +1,55 @@
+.body{
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+  }
+  
+  @media screen and (max-width: 1000px) {
+      .nn {
+        flex-direction: column;
+        justify-content: space-between;
+        overflow-x: hidden; 
+      }
+      .btom{
+        margin-top: 4rem;
+      }
+      .center{
+        margin-bottom:3rem;
+      }
+     
+    }
+  
+    
+    
+  .formm{
+    margin: 0px;
+    padding: 0;
+  }
+  
+  .nn{
+    padding: 0 !important;
+  }
+  .center{text-align: center;}
+  .foot{
+    margin-top: 1.5rem;
+  }
+  
+  .ro1{
+    border-radius: 10px;
+  }
+  .ro2{
+    border-radius: 10px;
+  }
+  
+  @media screen and (max-width: 520px) {
+    .ro1{
+      max-width: 85%;
+    }
+    .ro2{
+      max-width: 85%;
+    }
+   
+  }
