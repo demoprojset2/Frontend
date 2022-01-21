@@ -7,23 +7,17 @@
     color:white !important;
     margin: 20px 0px;
 }
-.card{
+/* .card{
     
     max-width: 400px;
     min-width: 300px;
-    /* height: 500px; */
     margin: 0 10px;
     margin-top: 40px;
-    /* transform: translateY(-10%); */
     box-shadow: 10px 10px 15px 1px rgba(0, 0, 0, 0.2);
     border:none;
     
-}
+} */
 
-.card1 {
-    /* transform: translateY(10%); */
-    margin-top: 40px;
-}
 
 
 .card-container{
@@ -32,10 +26,10 @@
     align-items: center;
 }
 
-.card-header {
+/* .card-header {
     background-color: #9A9483 !important;
     color: white;
-}
+} */
 
 .card-container-container{
     display: flex;

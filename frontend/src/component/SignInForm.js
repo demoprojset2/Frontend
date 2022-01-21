@@ -45,7 +45,7 @@ class SignInForm extends Component {
       email:this.state.name,
       password:this.state.password
      }
-       axios.post("http://127.0.0.1:8000/auth/api/login/",post).then(res => {
+       axios.post("/auth/api/login/",post).then(res => {
          console.log(res.data.token.access)
          console.log(res.data.profile.id)
          localStorage.setItem("token",res.data.token.access);
@@ -125,7 +125,7 @@ class SignInForm extends Component {
               User email
             </label>
             <input
-              type="email"
+              type="text"
               id="name"
               className="formFieldInput"
               placeholder="Enter your email address"

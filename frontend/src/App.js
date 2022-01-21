@@ -10,15 +10,16 @@ import SignInForm from "./component/SignInForm";
 import PatientLogin from "./component/Patientlogin";
 import Doctor from "./component/AddPatient";
 import Modals from "./component/Modals";
-import PatientDashboard2 from "./component/PatientDashboard2";
+import PatientDashboard2 from "./component/EditPatient";
 import Me2 from "./component/Me2";
 
-import Doctordashboard from "./component/Doctor-Dashboard";
+import DoctorDashboard from "./component/DoctorDashboard";
 import ViewPatient from "./component/ViewPatients";
 import PatientDashboard from './component/PatientDashboard'
-import ProblemDetails from "./component/patient/ProblemDetails";
+// import ProblemDetails from "./component/patient/ProblemDetails";
 import Prescriptions from "./component/patient/Prescriptions";
-import EditDetails from "./component/EditDetails"
+import EditPatient from "./component/EditPatient"
+import AddPatient from "./component/AddPatient"
 // import Home from "./component/Home"
 
 // function App() {
@@ -59,17 +60,18 @@ class App extends Component {
               <Route path="/modals" element={<Modals />} />
 
         
-            <Route  path="/docdash" element={<Doctordashboard />} ></Route>
+            <Route  path="/docdash" element={<DoctorDashboard />} ></Route>
             <Route  path="/patientlist" element={<ViewPatient />} ></Route>
 
             <Route path="/patient-login" element={<PatientLogin />} />
               <Route path="/patient-dashboard/:id" element={<PatientDashboard />} />
 
-              <Route path="/problem-details" element={<ProblemDetails />} />
+              {/* <Route path="/problem-details" element={<ProblemDetails />} /> */}
               <Route path="/prescriptions" element={<Prescriptions />} />
               <Route  path="/me" element={<Me2/>} ></Route>
               <Route  path="/viewdetails" element={<PatientDashboard2 />} ></Route>
-              <Route  path="/editdetails" element={<EditDetails />} ></Route>
+              <Route  path="/viewpatient" element={<EditPatient />} ></Route>
+              <Route  path="/addpatient" element={<AddPatient />} ></Route>
 
 
 

@@ -1,13 +1,11 @@
 import { Navigate } from "react-router-dom";
-import {useEffect } from "react";
-
+import { useEffect } from "react";
 
 const logout = () => {
   localStorage.clear();
-  window.location.href = "/sign-in"
-
-}
-const Navbar = ({title}) => {
+  window.location.href = "/sign-in";
+};
+const Navbar = ({ title }) => {
 
   // useEffect(() => {
 
@@ -18,10 +16,10 @@ const Navbar = ({title}) => {
   //   }
 
   // })
- 
+
   return (
-    <div >
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand text-white" href="/docdash">
           <h2>Online eHR</h2>
         </a>
@@ -36,20 +34,25 @@ const Navbar = ({title}) => {
         >
           <span className="navbar-toggler-icon "></span>
         </button>
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div
+          className="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
           <ul className="navbar-nav">
-          
-            <li  className="nav-item ">
-              <button style={{fontSize:'20px'}} onClick={logout} className="nav-link btn-danger text-white rounded font-weight-bold">
+            <li className="nav-item ">
+              <button
+                style={{ fontSize: "20px" }}
+                onClick={logout}
+                className="nav-link btn-danger text-white rounded font-weight-bold"
+              >
                 Logout
               </button>
             </li>
             {/* <li className="nav-item">
-              <a className="nav-link" href="#">
-                Sign Up
+              <a className="nav-link" href="/addpatient">
+                Add Patient
               </a>
             </li> */}
-           
           </ul>
         </div>
       </nav>
