@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast,ToastContainer } from "react-toastify";
 import Navbar from "./Navbar";
-
-import "./modals.css";
+import "./AddDetail.css";
 
 import { Link } from "react-router-dom";
 
-export default class Medication extends Component {
+export default class AddDetails extends Component {
   constructor() {
     super();
 
@@ -31,6 +30,7 @@ export default class Medication extends Component {
       med_id: null,
       amount: null,
       pat_name: "",
+      spinner:false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -76,7 +76,7 @@ export default class Medication extends Component {
     };
 
     const res1 = await axios.get(
-      `http://127.0.0.1:8000/api/patients/${pat_id}/details`,
+      `/api/patients/${pat_id}/details`,
       {
         headers: header,
       }
@@ -104,22 +104,25 @@ export default class Medication extends Component {
       comment: this.state.comment,
     };
     axios
-      .post(`http://127.0.0.1:8000/api/patients/${pat_id}/allergy`, post, {
+      .post(`/api/patients/${pat_id}/allergy`, post, {
         headers: header,
       })
       .then((res) => {
         console.log(res);
         toast.success("Allergy details successfully added");
+        this.setState({
+          spinner:true
+        })
         setTimeout(() => {
           window.location.reload();
-        }, 1500);
+        }, 5000);
       })
       .catch((err) => {
         console.log(err);
       });
     //
 
-    window.location.reload();
+    // window.location.reload();
   }
   handleproblemSubmit(event) {
     event.preventDefault();
@@ -140,7 +143,7 @@ export default class Medication extends Component {
       end_date: this.state.enddate,
     };
     axios
-      .post(`http://127.0.0.1:8000/api/doctors/${pat_id}/problems`, post2, {
+      .post(`/api/doctors/${pat_id}/problems`, post2, {
         headers: header,
       })
       .then((res) => {
@@ -179,7 +182,7 @@ export default class Medication extends Component {
       dose_description: this.state.dose_desc,
     };
     const res1 = await axios.post(
-      `http://127.0.0.1:8000/api/patients/${pat_id}/meds`,
+      `/api/patients/${pat_id}/meds`,
       post,
       {
         headers: header,
@@ -190,28 +193,35 @@ export default class Medication extends Component {
       med_id: res1.data.id,
     });
 
-    const res2 = await axios.post(
-      `http://127.0.0.1:8000/api/patients/medications/${this.state.med_id}/dose`,
+ axios.post(
+      `/api/patients/medications/${this.state.med_id}/dose`,
       dose,
       {
         headers: header,
       }
-    );
-    console.log(res2);
+    ).then(res => {
+      toast.success("Patient Medications successfully added");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
 
-    window.location.reload();
+    })
+    
+
+    // window.location.reload();
   }
 
   render() {
     return (
       <div>
+        <ToastContainer />
         <Navbar />
         <div
           className="d-flex justify-content-evenly align-items-center"
           style={{ height: "15vh" }}
         >
           <Link
-            to="/viewdetails"
+            to="/editpatient"
             className="new btn-lg btn-dark rounded pr-5 pl-5 pt-2 pb-2 text-white font-weight-bold"
           >
             {this.state.pat_name.toUpperCase()}
@@ -277,7 +287,7 @@ export default class Medication extends Component {
                       <div className="">
                         <div
                           className="row g-3 p-4 mm shadow-lg"
-                          style={{ backgroundColor: "#ACE1AF" }}
+                          style={{ backgroundColor: "#A2D2FF" }}
                         >
                           <div className="col-md-6">
                             <label
@@ -401,8 +411,8 @@ export default class Medication extends Component {
                           type="submit"
                           className="btn fw-bold"
                           style={{
-                            backgroundColor: "#bd97f0",
-                            color: "black",
+                            backgroundColor: "#6998AB",
+                            color: "white",
                           }}
                         >
                           Save changes
@@ -423,7 +433,7 @@ export default class Medication extends Component {
                       <div className="">
                         <div
                           className="row g-3 p-4 mm shadow-lg"
-                          style={{ backgroundColor: "#ACE1AF" }}
+                          style={{ backgroundColor: "#A2D2FF" }}
                         >
                           <div className="col-md-6">
                             <label
@@ -533,8 +543,8 @@ export default class Medication extends Component {
                           type="submit"
                           className="btn  fw-bold"
                           style={{
-                            backgroundColor: "#bd97f0",
-                            color: "black",
+                            backgroundColor: "#6998AB",
+                            color: "white",
                           }}
                         >
                           Save changes
@@ -555,7 +565,7 @@ export default class Medication extends Component {
                       <div className="">
                         <div
                           className="row g-3 p-4 mm shadow-lg"
-                          style={{ backgroundColor: "#ACE1AF" }}
+                          style={{ backgroundColor: "#A2D2FF" }}
                         >
                           <div className="col-md-6">
                             <label
@@ -634,7 +644,7 @@ export default class Medication extends Component {
                               <option value="Per Half Day">Per Half Day</option>
 
                               <option value="Per Day">Per Day</option>
-                              <option value="Per Quarter Hour">
+                              <option value="Per Quater Hour">
                                 Per Quarter Hour
                               </option>
                             </select>
@@ -667,8 +677,8 @@ export default class Medication extends Component {
                           type="submit"
                           className="btn fw-bold"
                           style={{
-                            backgroundColor: "#bd97f0",
-                            color: "black",
+                            backgroundColor:"#6998AB",
+                            color: "white",
                           }}
                         >
                           Save changes

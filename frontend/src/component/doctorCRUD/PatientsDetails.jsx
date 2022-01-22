@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Card from "../Card";
 // import Navbar from "./Navbar";
 import { toast, ToastContainer } from "react-toastify";
 import Collapse from "../patient/Collapse";
@@ -112,20 +111,7 @@ class PatientDetails extends Component {
       return
     }
 
-    // var email_id = this.state.email
-  
-    // if (validator.isEmail(email_id)) {
-    //   toast("Invalid Email")
-    //   return
-    // }
 
-    var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
-
-    // var email_re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if(!pattern.test(this.state.email)){
-      toast("Invalid Email")
-      return
-    }
 
     event.preventDefault();
     this.setState({

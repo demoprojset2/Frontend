@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const logout = () => {
@@ -39,11 +39,25 @@ const Navbar = ({ title }) => {
           id="navbarNav"
         >
           <ul className="navbar-nav">
+          <li className="nav-item ">
+          
+              <li
+                to="/addpatient">
+                  <button
+                style={{ fontSize: "20px" ,marginTop:"2px"}}
+              
+                className="nav-link btn btn-outline-info text-white rounded font-weight-bold mr-3 pt-2">
+              
+                Add New Patient
+                </button>
+              </li>
+            
+            </li>
             <li className="nav-item ">
               <button
                 style={{ fontSize: "20px" }}
                 onClick={logout}
-                className="nav-link btn-danger text-white rounded font-weight-bold"
+                className="nav-link text-dark rounded font-weight-bold ml-1"
               >
                 Logout
               </button>

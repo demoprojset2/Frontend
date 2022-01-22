@@ -42,7 +42,8 @@
   border-radius: 10px;
 }
 .nav-link.active{
-  background-color: #cdc5f7 !important;
+  background-color: #6998AB !important;
+  color: white !important;
   
 }
 

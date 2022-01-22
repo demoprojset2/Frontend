@@ -1,26 +1,71 @@
-import React from "react";
-import Card from "../Card";
-// import "../Dasboard.css";
+import React, { useState } from "react";
+import "../Dasboard.css";
 import Collapse from "./Collapse";
 import Table from "./Table";
+import { useParams } from "react-router";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 const PatientsDetails = ({ patient, vitals, social, allergy, problem }) => {
+  const allergyKeys = ["Type", "Substance", "Criticality", "Status"];
+  const problemKeys = ["Description", "Severity", "Status"];
+  const [comment, setComment] = useState("");
+  const params = useParams();
+  const id = params.id;
 
+  let handleSubmit;
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const resp = await axios.post(`/api/patient/${id}/comments`, {
+        comment: comment,
+      });
+      toast("Message Sent!");
+    } catch (error) {
+      toast("Some Error Occured!");
+    }
+  };
 
-  const allergyKeys = ["Type","Substance","Criticality","Status"]
-  const problemKeys = ["Description","Severity","Status"]
-
-  console.log(allergy,problem)
+  console.log(allergy, problem);
   return (
     <div>
+      <ToastContainer />
       <section class="background1 mt-5 ">
         <div id="accordion" className="mr-5 ml-5">
           <Collapse data={patient} title="General Details" count="One" />
           <Collapse data={vitals} title="Vital Details" count="Two" />
           <Collapse data={social} title="Social Details" count="Three" />
-          <Table data={allergy} keys={allergyKeys} title="Allergies" count="Four" />
-          <Table data={problem} keys={problemKeys} title="Problem Details" count="Five" />
+          <Table
+            data={allergy}
+            keys={allergyKeys}
+            title="Allergies"
+            count="Four"
+          />
+          <Table
+            data={problem}
+            keys={problemKeys}
+            title="Problem Details"
+            count="Five"
+          />
         </div>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="input-group ">
+            <div className="input-group-prepend">
+              <span className="input-group-text ml-5">
+                <button className="btn btn-dark m-0" type="submit">
+                  Send
+                </button>
+              </span>
+            </div>
+            <textarea
+              className="form-control mr-5"
+              aria-label="With textarea"
+              placeholder="Send message to your Doctor"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            ></textarea>
+          </div>
+        </form>
       </section>
     </div>
   );

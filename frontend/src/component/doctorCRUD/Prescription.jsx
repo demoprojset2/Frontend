@@ -20,7 +20,7 @@ const Prescription = ({ all, id }) => {
               Authorization: "Bearer " + token,
             };
         
-            const resp = await axios.patch(`api/patients/medications/${id}/dose`, body, {
+            const resp = await axios.patch(`/api/patients/medications/${id}/dose`, body, {
               headers: header,
             });
             toast.success("Data Updated")
@@ -41,7 +41,7 @@ const Prescription = ({ all, id }) => {
           Authorization: "Bearer " + token,
         };
     
-        const resp1 = await axios.delete(`api/patients/${iid}/${id}`, {
+        const resp1 = await axios.delete(`/api/patients/${iid}/${id}`, {
           headers: header,
         });
         window.location.reload();

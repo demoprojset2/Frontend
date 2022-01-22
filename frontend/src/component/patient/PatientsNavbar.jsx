@@ -27,7 +27,7 @@ const PatientsNavbar = () => {
       >
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link style={{fontSize:'20px'}} className="nav-link btn-danger rounded font-weight-bold text-white" to="/">
+            <Link style={{fontSize:'20px'}} className="nav-link text-white rounded font-weight-bold " to="/">
               Logout
             </Link>
           </li>

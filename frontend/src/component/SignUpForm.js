@@ -60,7 +60,7 @@ class SignUpForm extends Component {
       last_name: this.state.last_name,
     };
     axios
-      .post("http://127.0.0.1:8000/auth/api/register/", post)
+      .post(`/api/register/`, post)
       .then((res) => {
         console.log(res);
         this.setState({
@@ -115,7 +115,7 @@ class SignUpForm extends Component {
                 exact
                 to="/sign-in"
                 activeClassName="pageSwitcherItem-active"
-                className="pageSwitcherItem  btn-info"
+                className="pageSwitcherItem  btn-light"
               >
                 Sign in
               </NavLink>
@@ -149,7 +149,7 @@ class SignUpForm extends Component {
                   type="text"
                   id="name"
                   className="formFieldInput"
-                  placeholder="Enter your full name"
+                  placeholder="Enter your username"
                   name="name"
                   value={this.state.name}
                   onChange={this.handleChange}

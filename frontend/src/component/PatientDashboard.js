@@ -12,6 +12,7 @@ import { useParams } from "react-router";
 import Moment from "moment";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./Footer";
 
 const funType = (type) => {
     if (type === "1") {
@@ -244,12 +245,12 @@ const PatientDashboard = () => {
       <div className="body">
         <PatientsNavbar />
 
-        <section className="content">
+        <section className="content ">
           <div className="box">
             <h1 className="mt-5 mb-5 text-center">
               Hi {patient.Name.toUpperCase()}!
             </h1>
-            <div className="mr-5 ml-5 rounded inner-box pb-5 mb-5">
+            <div className="rounded inner-box pb-5 ">
               <Scrollspy num={setComponent} selected={component} />
               {component === 1 && (
                 <PatientsDetails
@@ -264,6 +265,7 @@ const PatientDashboard = () => {
             </div>
           </div>
         </section>
+        <Footer />
       </div>
     </div>
   );

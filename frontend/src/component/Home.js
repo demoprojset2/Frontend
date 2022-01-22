@@ -44,10 +44,10 @@ const Home = ({ setTitle }) => {
           <h4 style={{ paddingTop: "50px" }}>Log In Here!</h4>
           <div>
             <Link to="/sign-up">
-              <button class="btn btn-outline-light btn-lg mr-5">Doctors</button>
+              <button class="btn btn-outline-light btn-lg mr-4">Doctors</button>
             </Link>
             <Link to="/patient-login" >
-              <button class="btn btn-outline-light btn-lg ml-5">
+              <button class="btn btn-outline-light btn-lg ml-4">
                 Patients
               </button>
             </Link>

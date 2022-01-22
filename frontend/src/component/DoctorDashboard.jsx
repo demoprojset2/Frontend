@@ -4,7 +4,7 @@ import { useState } from "react";
 import { NavLink, Link, Router, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
-import background from "../background.jpeg";
+import Footer from "./Footer";
 class DoctorDashboard extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +38,7 @@ class DoctorDashboard extends Component {
     };
 
     const res1 = await axios
-      .get(`http://127.0.0.1:8000/api/doctors/${doctor_id}/getpatients`, {
+      .get(`/api/doctors/${doctor_id}/getpatients`, {
         headers: header,
       })
       .catch((err) => {
@@ -56,6 +56,7 @@ class DoctorDashboard extends Component {
   }
 
   handle(e) {
+    e.preventDefault();
     this.setState({
       search: e.target.value,
     });
@@ -74,7 +75,7 @@ class DoctorDashboard extends Component {
       Authorization: "Bearer " + token,
     };
     const res2 = await axios.get(
-      `http://127.0.0.1:8000/api/doctors/${doctor_id}/search/${post}`,
+      `/api/doctors/${doctor_id}/search/${post}`,
       {
         headers: header,
       }
@@ -88,19 +89,11 @@ class DoctorDashboard extends Component {
     this.setState({
       redirect: true,
     });
-
-    // posts.forEach(element => {
-    //   this.setState({
-    //       posts:[...this.state.posts,element.name],
-
-    //       })
-
-    // })
   }
   async handleClick(post) {
     localStorage.setItem("pat_id", post);
 
-    window.location.href = "/viewdetails";
+    window.location.href = "/editpatient";
   }
 
   handleEdit(post) {
@@ -121,118 +114,146 @@ class DoctorDashboard extends Component {
         <div className="row mr-0 new4">
           <div className="col-md-5 align-items-center new2 justify-content-center">
             <div class="col-12 col-md-10 col-lg-12 new">
-              <form class="card card-sm">
+              <form class="card card-sm mr-2 mb-2">
                 <div class="card-body row no-gutters align-items-center">
-                  <div class="col mr-2 ml-2">
+                  <div class="col mr-0 ml-2">
                     <input
                       class="form-control form-control-lg form-control-borderless text-dark"
                       type="search"
                       placeholder="Search patients by name"
                       onChange={this.handle}
-                    >
-                    </input>
+                    ></input>
                   </div>
                   {/* <i class="fa-solid fa-magnifying-glass"></i> */}
-                  {/* <div class="col-auto">
+                  <div class="col-auto">
                     <button
-                      class="btn btn-lg btn-success fas fa-search "
-                      type="submit"
+                      class="btn btn-lg btn-light ml-0 fas fa-search pt-3 pb-3"
+                      onClick={this.handle}
+                      disabled
                     ></button>
-                  </div> */}
+                  </div>
                 </div>
               </form>
             </div>
-            <div>
-                <Link to="/addpatient" className="btn btn-lg btn-info">
-                    Add New Patient
-                </Link>
-            </div>
           </div>
           <div className="col-md-6 p-0 mt-3 new3">
-            {this.state.posts.map(
-              (post, index) => (
-                <div class="job-box d-md-flex justify-content-between mb-20 card-5 p-2 rounded-lg">
-                  <div class="job-left my-4 d-md-flex align-items-center flex-wrap pl-5">
-                    <div class="img-holder  mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex">
-                      {post.name.slice(0, 2).toUpperCase()}
-                    </div>
-                    <div class="job-content">
-                      <h5 class="text-center text-md-left">
-                        {post.name.toUpperCase()}
-                      </h5>
-                      <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
-                        {/* <li class="mr-md-4">
-                          <i class="zmdi zmdi-pin mr-2"></i> {post.email_id}
-                        </li> */}
-                        <li class="mr-md-4">
-                          <i class="zmdi zmdi-money mr-2"></i>{" "}
-                          {post.phone_number}
-                        </li>
-                      </ul>
-                    </div>
+            {this.state.posts.map((post, index) => (
+              <div class="job-box d-md-flex justify-content-between mb-20 card-5 p-2 rounded-lg">
+                <div class="job-left my-4 d-md-flex align-items-center pl-4">
+                  <div class="img-holder  mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex">
+                    {post.name.slice(0, 2).toUpperCase()}
                   </div>
-                  <div class="job-right my-4 flex-shrink-0">
-                    <div class="job-content right-col col-lg-3 d-flex align-items-center icons pl-5">
-                      {/* <div class="">
+                  <div class="job-content">
+                    <h5 class="text-center text-md-left">
+                      {post.name.toUpperCase()}
+                    </h5>
+                    <ul class="d-md-flex text-capitalize ff-open-sans">
+                      <li class="mr-md-6">
+                        <i class="zmdi zmdi-pin mr-2"></i> {post.email_id}
+                      </li>
+                      <li class="mr-md-2">
+                        <i class="zmdi zmdi-money mr-2 pl-2"></i>{" "}
+                        {post.phone_number}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="job-right my-4 flex-shrink-0">
+                  <div class="job-content right-col col-lg-1 d-flex align-items-center icons pl-5">
+                    {/* <div class="">
                         <i
                           style={{ cursor: "pointer" }}
                           onClick={() => this.handleSearch(post.name)}
                           className=" mr-3 fa fa-plus text-secondary "
                         ></i>
                       </div> */}
-                      <div class="">
-                        <i
-                          style={{ cursor: "pointer", fontSize: "2rem" }}
-                          onClick={() => this.handleClick(post.id)}
-                          className="  mr-3 fas fa-arrow-right text-info"
-                        ></i>
-                      </div>
-                      {/* <div class="">
+                    <div class="">
+                      <i
+                        style={{ cursor: "pointer", fontSize: "2rem" }}
+                        onClick={() => this.handleClick(post.id)}
+                        className="  mr-3 fas fa-arrow-right text-info"
+                      ></i>
+                    </div>
+                    {/* <div class="">
                         <i
                           style={{ cursor: "pointer" }}
                           onClick={() => this.handleEdit(post.id)}
                           className="fas fa-user-edit text-danger"
                         ></i>
                       </div> */}
-                    </div>
                   </div>
                 </div>
-              )
-              //   <div class="project" key={index}>
-              //     <div class="row bg-white has-shadow">
-              //       <div class="left-col col-lg-9 d-flex align-items-center justify-content-between">
-              //         <div class="project-title d-flex align-items-center">
+              </div>
+            ))}
 
-              //           <div class="image has-shadow"><img src={"https://www.w3schools.com/howto/img_avatar.png"} alt="..." class="img-fluid"></img></div>
-              //           <div key={index} class="text"><h3 class="h4">{post.name.toUpperCase()}</h3><small>name</small>
-              //           </div>
-              //         </div>
-              //         <div class="project-date">
-              //           <span class="hidden-sm-down"></span>
+            {/* <div className="modal1">
+              <button
+                type="button"
+                className="btn"
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
+              >
+                <i
+                  style={{ cursor: "pointer" }}
+                  className="fa-regular fa-message"
+                ></i>
+              </button>
 
-              //           </div>
+              <div
+                className="modal fade"
+                id="exampleModalCenter"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true"
+              >
+                <div
+                  className="modal-dialog modal-dialog-centered"
+                  role="document"
+                >
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalCenterTitle">
+                        Your Message
+                      </h5>
+                    </div>
+                    <form className="row needs-validation mx-4 my-4">
+                      <div className="modal-body">
+                        <label
+                          htmlFor="validationCustom01"
+                          className="form-label"
+                        >
+                          Comment
+                        </label>
 
-              //       </div>
-              //   <div class="right-col col-lg-3 d-flex align-items-center">
-              //     <div class="">
-              //     <i style={{cursor:'pointer'}} onClick={() => this.handleSearch(post.name)} className=" mr-3 fa fa-plus ">
-              //         </i>
-              //     </div>
-              //     <div class="">
-              //     <i style={{cursor:'pointer'}} onClick={() => this.handleClick(post.id)} className=" mr-3 fas fa-arrow-right">
-              //         </i>
-              //     </div>
-              //     <div class="">
-              //     <i style={{cursor:'pointer'}} onClick={() => this.handleEdit(post.id)} className=" fas fa-user-edit mr-2">
-              //         </i>
-              //     </div>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="comment"
+                          id="validationCustom01"
+                          required
+                        />
+                      </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div> */}
 
-              //   </div>
-              //     </div>
-              //   </div>
-            )}
+
+
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

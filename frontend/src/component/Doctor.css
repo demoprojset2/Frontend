@@ -4,7 +4,7 @@
 /* ===== Career ===== */
 
 .new3{
-    background:#EDF6E5;
+  background-color: #D3DEDC;
 }
 .new4{
     background-color: #D3DEDC;
@@ -193,21 +193,26 @@ ul {
 .new{
     margin-top: 10px;
 
-    margin-left: 25px;
+    margin-left: 10px;
 }
 
 .card-5 {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.123), 0 6px 6px rgba(0,0,0,0.23);
+    background:#EDF6E5;
+    margin-bottom: 20px;
   }
 
   @media (max-width: 768px) {
     .new{
         margin-top: 10px;
-        margin-bottom: 15px;
+        /* margin-bottom: 15px; */
         margin-left: 10px;
     }
     .icons{
         padding-left: 25px;
+    }
+    .new4{
+      min-height: 200px;
     }
   }
   @media (min-width: 768px) {

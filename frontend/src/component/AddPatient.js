@@ -6,6 +6,7 @@ import './addpat.css'
 import PatientLogin from './Patientlogin';
 import Navbar from './Navbar';
 import { toast, ToastContainer } from 'react-toastify';
+import Footer from './Footer';
 class AddPatient extends Component {
   constructor() {
     super();
@@ -100,31 +101,18 @@ class AddPatient extends Component {
     
     let res1
     try {
-      res1 = await axios.post(`api/doctors/${doc_id}/addpatient`, post, {
+      res1 = await axios.post(`/api/doctors/${doc_id}/addpatient`, post, {
         headers: header
-      })  
-    } 
-    catch(err) {
-      console.log(err.response);
-      this.setState({
-        err: true
-
-      })
-      toast.error(err.response.data.email_id[0])
-      // window.alert("Incorrect details")
-    }
-
-    if (!this.state.err) {
-
+      }) 
       console.log(res1)
       localStorage.setItem("pat_id", res1.data.id)
       const pat_id = localStorage.getItem("pat_id")
-      const res2 = await axios.post(`api/patients/${pat_id}/vitaldetails`, vitail, {
+      const res2 = await axios.post(`/api/patients/${pat_id}/vitaldetails`, vitail, {
         headers: header
       })
       console.log(res2);
 
-      const res3 = await axios.post(`api/doctors/${pat_id}/socialhistory`, social, {
+      const res3 = await axios.post(`/api/doctors/${pat_id}/socialhistory`, social, {
         headers: header
 
       })
@@ -134,8 +122,24 @@ class AddPatient extends Component {
       })
       toast.success("Patient details added.Click next to add details")
 
+    } 
+    catch(err) {
+      console.log("first");
+      console.log(err.response);
+      this.setState({
+        err: true
 
+      })
+      toast.error(err.response.data.email_id[0])
+      // window.alert("Incorrect details")
     }
+
+    // if (!this.state.err) {
+
+      
+
+
+    // }
 
 
 
@@ -348,7 +352,7 @@ class AddPatient extends Component {
                     onChange={this.handleChange}
                     className="form-control"
                     id="validationCustom01"
-                    min={92}
+                    min={80}
                     required
                   />
                   <div className="valid-feedback">Looks good!</div>
@@ -420,7 +424,7 @@ class AddPatient extends Component {
             </div>
             {this.state.show ?
               <div>
-                <Link to="/modals" className="col-4 my-4" >
+                <Link to="/add_details" className="col-4 my-4" >
                   <button className="btn btn-dark btn-lg" type='submit' style={{ fontWeight: "bold" }} >
                     Next
                   </button>
@@ -431,7 +435,7 @@ class AddPatient extends Component {
                : null }
           </div>
         </form >
-
+          <Footer/>
       </div>
     )
   }

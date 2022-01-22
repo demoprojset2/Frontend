@@ -8,10 +8,14 @@ import Scrollspy from "./doctorCRUD/Scrollspy";
 import PatientsDetails from "./doctorCRUD/PatientsDetails";
 import ProblemDetails from "./doctorCRUD/ProblemDetails";
 import EditPrescriptions from "./doctorCRUD/EditPrescription";
+import Messages from "./doctorCRUD/Messages";
+
+
 import {useParams} from 'react-router';
 import Moment from 'moment';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "./Footer";
 
 
 const EditPatient = () => {
@@ -62,6 +66,7 @@ const EditPatient = () => {
     Tobacco:"",
     Alcohol:"",
   } );
+  const [comment, setComment] = useState(null);
 
 
   const fetchPatientData = async () => {
@@ -151,7 +156,18 @@ const EditPatient = () => {
         nw.push(obj)
     })
     setAll(nw)
+
+    try {
+      const resp7= await axios.get(`/api/${id}/comments`,{
+        headers:header
+      });
+      console.log(resp7.data)
+      setComment(resp7.data)
+    } catch (error) {
+      toast("Some Error Occured!")
+    };
   };
+
 
   useEffect(() => {
     console.log("here")
@@ -177,9 +193,11 @@ const EditPatient = () => {
               {
                 component===4 && <EditPrescriptions all={all} />
               }
+              {component === 5 && <Messages comment={comment} />}
             </div>
           </div>
         </section>
+        <Footer />
       </div>
     </div>
   );

@@ -25,6 +25,7 @@ const EditPrescription = ({ all }) => {
       };
       const dose = {
         dose_amount,
+
         dose_timing,
         dose_description
       };
@@ -39,7 +40,7 @@ const EditPrescription = ({ all }) => {
       const med_id =resp1.data.id
 
       const res2 = await axios.post(
-        `http://127.0.0.1:8000/api/patients/medications/${med_id}/dose`,
+        `/api/patients/medications/${med_id}/dose`,
         dose,
         {
           headers: header,

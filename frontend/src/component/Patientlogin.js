@@ -19,7 +19,7 @@ const PatientLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const resp1 = await axios.get(`api/patient/${id}/me`);
+      const resp1 = await axios.get(`/api/patient/${id}/me`);
       if(resp1.data.name){
         console.log(resp1.data.id)
         setSuccess(true)
