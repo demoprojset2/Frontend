@@ -33,6 +33,11 @@ const ProblemDetails = ({ problem }) => {
           const resp = await axios.post(`/api/doctors/${iid}/problems`, body, {
             headers: header,
           });
+
+          if(new Date(start_date) > Date.now()){
+            toast("Date Invalid")
+            return
+          }
             window.location.reload();
             toast.success("Data Added Successfully!")
           }
@@ -41,6 +46,8 @@ const ProblemDetails = ({ problem }) => {
       toast("Some Error Occured!")
       
   }
+
+
   
 
 

@@ -120,7 +120,7 @@ class AddPatient extends Component {
       this.setState({
         show: true
       })
-      toast.success("Patient details added.Click next to add details")
+      toast.success("Patient details Added. Click next to add details")
 
     } 
     catch(err) {

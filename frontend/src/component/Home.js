@@ -38,7 +38,7 @@ const Home = ({ setTitle }) => {
       </nav>
       <div>
         <div className="header-content" id="header">
-          <h1 style={{ fontSize: "5rem" }}>Improving Lives Together</h1>
+          <h1 style={{ fontSize: "4.5rem" }} className="pr-pb-3 heading_line">Improving Lives Together</h1>
           <h2>Taking Healthcare Innovation into High Gear</h2>
 
           <h4 style={{ paddingTop: "50px" }}>Log In Here!</h4>
@@ -54,12 +54,12 @@ const Home = ({ setTitle }) => {
           </div>
         </div>
 
-        <div class="box2">
+        <div class="box2 pb-5 pt-5">
           <div class="part-container">
             <div class="participation" id="zen-participation" role="article">
               <h2>How to get Started</h2>
               <p>
-              For the past century, health care measurement and delivery have been centered in hospitals and clinics. That is beginning to change as health measures and increasingly care delivery are migrating to homes and mobile devices. The COVID-19 pandemic has only accelerated this transition. While increasing access to care and improving convenience, this move toward platforms operated by for-profit firms raises concerns about privacy, equity, and duty that will have to be addressed. In addition, this change in measuring health and delivering health care will create opportunities for educators to expand the settings for training, researchers to conduct studies at enormous scale, payors to embrace lower-cost clinical settings, and patients to make their voices heard.
+              For the past century, health care measurement and delivery have been centered in hospitals and clinics. That is beginning to change as health measures and increasingly care delivery are migrating to homes and mobile devices. The COVID-19 pandemic has only accelerated this transition. While increasing access to care and improving convenience, this move toward platforms operated by for-profit firms raises concerns about privacy, equity, and duty that will have to be addressed.
               </p>
             </div>
             <div class="part-image-container">
@@ -71,11 +71,11 @@ const Home = ({ setTitle }) => {
             </div>
           </div>
           {/* <div class='hr'><hr></div> */}
-          <div class="beni-container">
+          <div class="beni-container d-flex">
             <div class="benefits" id="zen-benefits" role="article">
               <h2>Benefits</h2>
               <p>
-              These developments are part of a broader migration of care from hospitals and clinics to home and mobile devices. Everything from acute stroke care (mobile stroke units) to hospitalizations for pneumonia (hospital at home) are moving toward the home. This transition mirrors what has already occurred in other industries, such as entertainment, banking, and retail. Underlying these transitions are mobile devices, which are amazingly young. The smartphone, first released in 2007, is still a teenager.
+              These developments are part of a broader migration of care from hospitals and clinics to home and mobile devices. Everything from acute stroke care (mobile stroke units) to hospitalizations for pneumonia (hospital at home) are moving toward the home. This transition mirrors what has already occurred in other industries, such as entertainment, banking, and retail.
               </p>
             </div>
             <div class="beni-image-container">

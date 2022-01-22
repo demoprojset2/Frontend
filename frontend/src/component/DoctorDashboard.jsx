@@ -89,6 +89,8 @@ class DoctorDashboard extends Component {
     this.setState({
       redirect: true,
     });
+    
+
   }
   async handleClick(post) {
     localStorage.setItem("pat_id", post);
@@ -110,7 +112,6 @@ class DoctorDashboard extends Component {
     return (
       <div>
         <Navbar />
-
         <div className="row mr-0 new4">
           <div className="col-md-5 align-items-center new2 justify-content-center">
             <div class="col-12 col-md-10 col-lg-12 new">
@@ -128,15 +129,34 @@ class DoctorDashboard extends Component {
                   <div class="col-auto">
                     <button
                       class="btn btn-lg btn-light ml-0 fas fa-search pt-3 pb-3"
-                      onClick={this.handle}
+                      // onClick={this.handle}
                       disabled
                     ></button>
+                    
                   </div>
+                  
                 </div>
+                
               </form>
+              
             </div>
+            
           </div>
           <div className="col-md-6 p-0 mt-3 new3">
+          {this.state.posts.length === 0 && 
+          <div>
+              <div className="d-flex pt-3 mt-5 pb-5 mb-5 justify-content-center text-align-center ">
+                <h1>
+                  No Patients!
+                </h1>
+                </div>
+                
+                {/* <div className="d-flex mt-5 mb-5 justify-content-center text-align-center ">
+                <img src="https://www.pinclipart.com/picdir/big/194-1945539_1-really-sad-error-svg-clipart.png" alt="Logo" className="logo"/>
+                </div> */}
+                
+            </div>}
+
             {this.state.posts.map((post, index) => (
               <div class="job-box d-md-flex justify-content-between mb-20 card-5 p-2 rounded-lg">
                 <div class="job-left my-4 d-md-flex align-items-center pl-4">

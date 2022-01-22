@@ -62,7 +62,7 @@ const Allergy = ({ allergy, id }) => {
         <h4 class="mb-0"> {allergy.substance}</h4>
         <div>
         <button
-          class="btn btn-link collapsed text-dark"
+          class="btn btn-link collapsed text-dark mr-0"
           data-toggle="collapse"
           data-target={"#collapse" + id}
           aria-expanded="true"
@@ -70,7 +70,7 @@ const Allergy = ({ allergy, id }) => {
         >
           <i class="fas fa-chevron-circle-down"></i>
         </button>
-        <button  onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) handleDelete(e, allergy.id) } }><i class="fas fa-trash"></i></button>
+        <button className="btn btn-link text-dark ml-0" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) handleDelete(e, allergy.id) } }><i class="fas fa-trash"></i></button>
         </div>
       </div>
       

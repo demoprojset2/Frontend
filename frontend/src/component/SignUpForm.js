@@ -60,7 +60,7 @@ class SignUpForm extends Component {
       last_name: this.state.last_name,
     };
     axios
-      .post(`/api/register/`, post)
+      .post(`/auth/api/register/`, post)
       .then((res) => {
         console.log(res);
         this.setState({

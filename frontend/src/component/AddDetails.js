@@ -148,6 +148,10 @@ export default class AddDetails extends Component {
       })
       .then((res) => {
         console.log(res);
+        if(new Date(this.state.startdate) > Date.now()){
+          toast("Date Invalid")
+          return
+        }
         toast.success("Patient problem successfully added");
         setTimeout(() => {
           window.location.reload();
@@ -351,7 +355,7 @@ export default class AddDetails extends Component {
                               required
                             >
                               <option selected disabled value="">
-                                Low
+                                Select
                               </option>
                               <option value="1">Low</option>
                               <option value="2">Medium</option>

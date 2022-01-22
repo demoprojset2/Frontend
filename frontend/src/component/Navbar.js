@@ -1,5 +1,6 @@
 import { Link, Navigate } from "react-router-dom";
 import { useEffect } from "react";
+import "../index.css"
 
 const logout = () => {
   localStorage.clear();
@@ -7,15 +8,6 @@ const logout = () => {
 };
 const Navbar = ({ title }) => {
 
-  // useEffect(() => {
-
-  //   const token = localStorage.getItem("token");
-
-  //   if(token == null){
-  //     return <Navigate to="/sign-in" />
-  //   }
-
-  // })
 
   return (
     <div>
@@ -41,16 +33,16 @@ const Navbar = ({ title }) => {
           <ul className="navbar-nav">
           <li className="nav-item ">
           
-              <li
+              <Link
                 to="/addpatient">
                   <button
-                style={{ fontSize: "20px" ,marginTop:"2px"}}
+                style={{ fontSize: "20px" ,marginTop:"2px",color:"inherit", textDecoration:"inherit"}}
               
-                className="nav-link btn btn-outline-info text-white rounded font-weight-bold mr-3 pt-2">
+                className="nav-link btn btn-outline-info text-white rounded font-weight-bold mr-3 pt-2 nv-button">
               
                 Add New Patient
                 </button>
-              </li>
+              </Link>
             
             </li>
             <li className="nav-item ">
